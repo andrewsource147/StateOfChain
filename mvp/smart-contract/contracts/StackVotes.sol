@@ -4,33 +4,22 @@ contract StackVotes {
     // Read/write candidate
     address public admin;
 
-   
-
-    mapping (address => uint8) public itemVotes;    
-    //item to user
-    mapping (address => address) public itemUser;    
-    
-
-    event CreateItem(address indexed _item, address indexed _user);
-    event VoteItem(address _item, uint8 _vote);
+    mapping (address => uint8) public userVotes;        
+        
+    event VoteUser(address _user, address _voter, uint256 _isUpVote );
 
     // Constructor
     constructor () public {
         admin = msg.sender;
     }
 
-    function createItems(address _item) public{        
-        require(
-            itemUser[_item] == 0x0,
-            "This questions have been added."
-        );
-        itemUser[_item] = msg.sender;
-        emit CreateItem(_item, msg.sender);
-    }
-
-    function votesItem(address _item, uint8 _vote) public{        
-        itemVotes[_item]  = itemVotes[_item] + _vote;
-        emit VoteItem(_item, _vote);
+    function votesUser(address _user, uint256 _isUpVote) public{        
+        if (_isUpVote == 1){
+            userVotes[_user]  = userVotes[_user] + 1;    
+        }else{
+            userVotes[_user]  = userVotes[_user] - 1;    
+        }
+        emit VoteUser(_user, msg.sender, _isUpVote);
     }
 
     function  transferAdmin(address _adminAddr) public {

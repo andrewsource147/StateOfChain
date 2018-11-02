@@ -32,9 +32,10 @@ FormData:
  {status: "success"}
  {status: "fail", reason: ""}
 
-2. /submit/anwser  
+2. /submit/answer  
 Type: POST
 FormData: 
+ - question_id
  - content
  - address  (user)
  Return: 
@@ -45,6 +46,7 @@ Type: POST
 FormData:
  - quesion_id 
  - address  (user)
+ - is_upvotes (0, 1)
  Return: 
  {status: "success"}
 
@@ -53,6 +55,7 @@ Type: POST
 FormData:
  - answer_id 
  - address  (user)
+ - is_upvotes (0, 1)
  Return: 
  {status: "success"}
 

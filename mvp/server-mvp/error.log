@@ -1,0 +1,64 @@
+11:23:23.444 INFO  errorLog Cannot find module 'sqlite3'
+Error: Cannot find module 'sqlite3'
+    at Function.Module._resolveFilename (module.js:538:15)
+    at Function.Module._load (module.js:468:25)
+    at Module.require (module.js:587:17)
+    at require (internal/module.js:11:18)
+    at Object.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:1:79)
+    at Module._compile (module.js:643:30)
+    at Object.Module._extensions..js (module.js:654:10)
+    at Module.load (module.js:556:32)
+    at tryModuleLoad (module.js:499:12)
+    at Function.Module._load (module.js:491:3) accepted at 2018-11-02T04:23:23.444Z 
+11:23:45.419 INFO  errorLog this.initArraySupportedTokenAddress is not a function
+TypeError: this.initArraySupportedTokenAddress is not a function
+    at new SqlitePersist (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:24:10)
+    at Object.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/server_http.js:38:17)
+    at Module._compile (module.js:643:30)
+    at Object.Module._extensions..js (module.js:654:10)
+    at Module.load (module.js:556:32)
+    at tryModuleLoad (module.js:499:12)
+    at Function.Module._load (module.js:491:3)
+    at Function.Module.runMain (module.js:684:10)
+    at startup (bootstrap_node.js:187:16)
+    at bootstrap_node.js:608:3 accepted at 2018-11-02T04:23:45.419Z 
+11:24:00.158 INFO  errorLog Cannot find module './eth/ethereum'
+Error: Cannot find module './eth/ethereum'
+    at Function.Module._resolveFilename (module.js:538:15)
+    at Function.Module._load (module.js:468:25)
+    at Module.require (module.js:587:17)
+    at require (internal/module.js:11:18)
+    at main (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/server_http.js:51:25)
+    at Object.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/server_http.js:59:1)
+    at Module._compile (module.js:643:30)
+    at Object.Module._extensions..js (module.js:654:10)
+    at Module.load (module.js:556:32)
+    at tryModuleLoad (module.js:499:12) accepted at 2018-11-02T04:24:00.158Z 
+11:35:44.404 INFO  errorLog SQLITE_ERROR: table tbl_question has no column named address
+Error: SQLITE_ERROR: table tbl_question has no column named address accepted at 2018-11-02T04:35:44.403Z 
+11:35:47.774 INFO  errorLog SQLITE_ERROR: table tbl_question has no column named address
+Error: SQLITE_ERROR: table tbl_question has no column named address accepted at 2018-11-02T04:35:47.774Z 
+11:36:53.011 INFO  errorLog SQLITE_ERROR: table tbl_question has no column named address
+Error: SQLITE_ERROR: table tbl_question has no column named address accepted at 2018-11-02T04:36:53.011Z 
+11:37:11.441 INFO  errorLog SQLITE_ERROR: table tbl_question has no column named timestamp
+Error: SQLITE_ERROR: table tbl_question has no column named timestamp accepted at 2018-11-02T04:37:11.441Z 
+13:05:23.628 INFO  errorLog Cannot read property 'all' of undefined
+TypeError: Cannot read property 'all' of undefined
+    at Statement.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:163:19)
+--> in Database#get('SELECT * FROM tbl_question where id = ?', [ '1' ], [Function])
+    at Promise (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:156:15)
+    at new Promise (<anonymous>)
+    at SqlitePersist.getQuestion (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:154:12)
+    at /Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/server_http.js:128:27
+    at Layer.handle [as handle_request] (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/node_modules/express/lib/router/index.js:281:22 accepted at 2018-11-02T06:05:23.628Z 
+13:09:12.686 INFO  errorLog SQLITE_ERROR: table tbl_answer has no column named questionId
+Error: SQLITE_ERROR: table tbl_answer has no column named questionId accepted at 2018-11-02T06:09:12.685Z 
+13:13:25.313 INFO  errorLog resolve is not defined
+ReferenceError: resolve is not defined
+    at Statement.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:102:13)
+--> in Database#run('UPDATE tbl_question SET votes = ? WHERE id = ?', [ 1, '1' ], [Function])
+    at Statement.db.get (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:97:17) accepted at 2018-11-02T06:13:25.313Z 

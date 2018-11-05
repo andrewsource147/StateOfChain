@@ -1,8 +1,12 @@
 import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
+import {updateUserVotes} from "../app/actions/userActions.js"
 
 class Ranking extends Component {
+  componentDidMount = ()=>{
+    this.props.dispatch(updateUserVotes(this.props.user.users))
+  }
   render() {
     return (
       <Layout>

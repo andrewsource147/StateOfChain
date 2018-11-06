@@ -2,6 +2,7 @@ import {createStore, applyMiddleware} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from './app/reducers'
 import rootSaga from './app/sagas'
+import logger from "redux-logger"
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -11,10 +12,13 @@ function StoreConfiguration(preloadedState) {
    * Since Next.js does server-side rendering, you are REQUIRED to pass`preloadedState`
    * when creating the store.
    */
+
+  var middlewareArray = [sagaMiddleware, logger]
+
   const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(sagaMiddleware)
+    applyMiddleware(...middlewareArray)
   )
 
   /**

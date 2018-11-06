@@ -6,7 +6,7 @@ export const answerActionTypes = {
   SET_LOADING: 'SET_LOADING'
 }
 
-export function setAnswer(answers) {
+export function setAnswers(answers) {
   return {
     type: answerActionTypes.SET_ANSWERS,
     payload: answers

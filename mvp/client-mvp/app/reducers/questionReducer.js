@@ -1,28 +1,8 @@
 import {questionActionTypes} from '../actions/questionActions'
 
 export const initialState = {
-  questions: [
-    {
-      id: 0,
-      title: 'Just a question',
-      content: 'I dont know how next.js work',
-      href: '',
-      created: '2018-01-19 03:14:07',
-      user: '0x9559034c287a0e73a9a68288bc27eb8189427aa1',
-      votes: 10,
-      answers: 9
-    },
-    {
-      id: 1,
-      title: 'What is Next.js',
-      content: 'I dont know how next.js work',
-      href: '',
-      created: '2018-01-20 02:07:18',
-      user: '0xd1946aeffc2d053b76fab96117b6f2c7bf395e32',
-      votes: 2,
-      answers: 1
-    }
-  ],
+  questions: [],
+  selectedQuestion: null,
   isLoading: false
 }
 
@@ -32,6 +12,11 @@ export default function questionReducer(state = initialState, action) {
       return {
         ...state,
         ...{questions: action.payload}
+      }
+    case questionActionTypes.SET_QUESTION:
+      return {
+        ...state,
+        ...{ selectedQuestion: action.payload }
       }
     case questionActionTypes.UPDATE_QUESTION_VOTE:
       const {questionId, isUpvote} = action.payload

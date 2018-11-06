@@ -2,10 +2,22 @@ import { withRouter } from 'next/router'
 import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
-import { voteQuestion } from '../app/actions/questionActions'
-import {voteAnswer} from "../app/actions/answerActions";
+import {questionActionTypes, voteQuestion} from '../app/actions/questionActions'
+import { voteAnswer } from "../app/actions/answerActions";
 
 class Question extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      questionId: props.router.query.id
+    }
+  }
+
+  componentDidMount = () => {
+    this.props.dispatch({ type: questionActionTypes.FETCH_QUESTION, payload: this.state.questionId });
+  }
+
   onVoteQuestion(questionId, isUpvote) {
     this.props.dispatch(voteQuestion(questionId, isUpvote))
   }
@@ -15,10 +27,11 @@ class Question extends Component {
   }
 
   render() {
-    const question = this.props.question.questions[this.props.router.query.id]
+    const question = this.props.question.selectedQuestion
 
     return (
       <Layout>
+        {question &&
         <div>
           <h1>Question #{this.props.router.query.id}: {question.title}</h1>
           <div>
@@ -28,11 +41,11 @@ class Question extends Component {
           </div>
           <p>{question.content}</p>
         </div>
+        }
 
         <div>
           <div>
-            <h3>Answer</h3>
-            <div>User:</div>
+            <h3>Answers</h3>
             {this.props.answer.answers.map((answer, i) => (
               <div key={i}>
                 <div>

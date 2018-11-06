@@ -1,20 +1,7 @@
 import { answerActionTypes } from '../actions/answerActions'
 
 export const initialState = {
-  answers: [
-    {
-      id: 1,
-      content: 'An answer for a question',
-      user: '0x9559034c287a0e73a9a68288bc27eb8189427aa1',
-      votes: 1
-    },
-    {
-      id: 2,
-      content: 'An answer for a question 2',
-      user: '0x9559034c287a0e73a9a68288bc27eb81835j7aa1',
-      votes: 3
-    },
-  ],
+  answers: [],
   isLoading: false
 }
 

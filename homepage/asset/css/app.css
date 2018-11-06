@@ -1,0 +1,169 @@
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px 16px 15px;
+  box-shadow: 0 0px 10px #ccc; }
+  .home-header .home-logo {
+    display: flex;
+    align-items: center; }
+    .home-header .home-logo img {
+      height: 50px; }
+    .home-header .home-logo .home-logo-title {
+      margin-left: 10px; }
+      .home-header .home-logo .home-logo-title a {
+        font-weight: bold;
+        font-size: 27px;
+        margin-left: 5px;
+        color: #222222; }
+        .home-header .home-logo .home-logo-title a:hover {
+          color: #222222; }
+  .home-header .menu-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+    .home-header .menu-bar ul li {
+      float: left;
+      padding: 16px; }
+      .home-header .menu-bar ul li a {
+        display: block;
+        text-align: center;
+        color: #222222; }
+        .home-header .menu-bar ul li a:hover {
+          color: #666666; }
+  .home-header .sign-in .text {
+    font-size: 13px;
+    font-weight: bold; }
+
+.btn-sc {
+  background-color: #31cb9e;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+  font-weight: bold; }
+  .btn-sc:hover {
+    cursor: pointer; }
+  .btn-sc:focus {
+    outline: 0; }
+
+.home-overview {
+  padding: 70px 0; }
+  .home-overview .wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fbfafb; }
+    .home-overview .wrapper .content {
+      position: relative; }
+      .home-overview .wrapper .content .hone-background {
+        height: 500px;
+        background-image: url(../../asset/img/true_background.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat; }
+    .home-overview .wrapper .intro-div {
+      display: flex;
+      justify-content: center;
+      position: relative; }
+      .home-overview .wrapper .intro-div .intro {
+        max-width: 800px;
+        position: absolute;
+        bottom: -150px;
+        background: white;
+        box-shadow: 0 2px 10px #ccc;
+        height: 350px;
+        padding: 25px 50px 15px 50px; }
+        .home-overview .wrapper .intro-div .intro h3 {
+          color: #31cb9e; }
+        .home-overview .wrapper .intro-div .intro .description {
+          font-size: 21px;
+          margin: 15px 0;
+          color: #666666; }
+        .home-overview .wrapper .intro-div .intro .detail {
+          position: relative;
+          margin: 10px 15px;
+          padding-left: 30px;
+          color: #666666; }
+          .home-overview .wrapper .intro-div .intro .detail::before {
+            content: "";
+            height: 15px;
+            width: 8px;
+            transform: rotate(45deg);
+            border-right: 2px solid #31cb9e;
+            border-bottom: 2px solid #31cb9e;
+            position: absolute;
+            top: 2px;
+            left: 0; }
+        .home-overview .wrapper .intro-div .intro .try-it {
+          text-align: center;
+          margin-top: 25px; }
+          .home-overview .wrapper .intro-div .intro .try-it .btn-sc {
+            width: 250px;
+            padding: 15px 0;
+            border-radius: 25px; }
+        @media screen and (max-width: 800px) {
+          .home-overview .wrapper .intro-div .intro {
+            position: relative;
+            bottom: unset;
+            height: unset; } }
+    .home-overview .wrapper .member {
+      padding: 250px 30px 50px; }
+      .home-overview .wrapper .member h3 {
+        text-align: center;
+        color: #31cb9e; }
+      .home-overview .wrapper .member .member-detail {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 50px; }
+        .home-overview .wrapper .member .member-detail .profile {
+          margin: 0 10px; }
+          .home-overview .wrapper .member .member-detail .profile .avatar {
+            width: 125px;
+            height: 125px;
+            margin-bottom: 20px;
+            background-position: center;
+            background-size: contain; }
+          .home-overview .wrapper .member .member-detail .profile:first-child .avatar {
+            background-image: url(../../asset/img/trungxuan.jpg); }
+          .home-overview .wrapper .member .member-detail .profile:nth-child(2) .avatar {
+            background-image: url(../../asset/img/cuongnguyen.jpeg); }
+          .home-overview .wrapper .member .member-detail .profile:nth-child(3) .avatar {
+            background-image: url(../../asset/img/gin.jpg); }
+          .home-overview .wrapper .member .member-detail .profile:nth-child(4) .avatar {
+            background-image: url(../../asset/img/hale.jpg); }
+          .home-overview .wrapper .member .member-detail .profile:nth-child(5) .avatar {
+            background-image: url(../../asset/img/liemnguyen.jpg); }
+          .home-overview .wrapper .member .member-detail .profile .name, .home-overview .wrapper .member .member-detail .profile .role {
+            text-align: center;
+            color: #222222; }
+          .home-overview .wrapper .member .member-detail .profile .role {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666666; }
+      @media screen and (max-width: 800px) {
+        .home-overview .wrapper .member {
+          padding-top: 50px; }
+          .home-overview .wrapper .member .member-detail {
+            flex-wrap: wrap; }
+            .home-overview .wrapper .member .member-detail .profile {
+              margin-bottom: 30px; } }
+
+.contact-us {
+  height: 225px;
+  background-color: #f5f5f5;
+  text-align: center;
+  margin-top: 10px; }
+  .contact-us h5 {
+    padding-top: 70px;
+    margin-bottom: 27px;
+    font-weight: bold;
+    color: #666666; }
+  .contact-us .btn-sc {
+    font-size: 13px;
+    padding: 15px 45px;
+    border-radius: 3px; }
+
+.home-footer {
+  height: 60px; }
+
+/*# sourceMappingURL=app.css.map */

@@ -1,1 +1,4 @@
+*.db
+/stores
 node_modules/
+.next/

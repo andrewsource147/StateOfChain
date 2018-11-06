@@ -60,7 +60,7 @@ function saveVotes(votes) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/client-mvp/app/components/Footer.js";
+var _jsxFileName = "/Users/ngoxuantrung/projects/StateOfChain/mvp/client-mvp/app/components/Footer.js";
 
 
 var Footer = function Footer() {
@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
-var _jsxFileName = "/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/client-mvp/app/components/Header.js";
+var _jsxFileName = "/Users/ngoxuantrung/projects/StateOfChain/mvp/client-mvp/app/components/Header.js";
 
 
 var linkStyle = {
@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./app/components/Header.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer */ "./app/components/Footer.js");
-var _jsxFileName = "/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/client-mvp/app/components/Layout.js";
+var _jsxFileName = "/Users/ngoxuantrung/projects/StateOfChain/mvp/client-mvp/app/components/Layout.js";
 
 
 
@@ -12386,7 +12386,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_Layout_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app/components/Layout.js */ "./app/components/Layout.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _app_actions_userActions_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/actions/userActions.js */ "./app/actions/userActions.js");
-var _jsxFileName = "/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/client-mvp/pages/ranking.js";
+var _jsxFileName = "/Users/ngoxuantrung/projects/StateOfChain/mvp/client-mvp/pages/ranking.js";
 
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12529,7 +12529,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /*!********************************!*\
   !*** multi ./pages/ranking.js ***!
   \********************************/
@@ -12554,5 +12554,5 @@ module.exports = dll_10edf27d814a728d21af;
 
 /***/ })
 
-},[[8,"static/runtime/webpack.js"]]]));;
+},[[9,"static/runtime/webpack.js"]]]));;
 //# sourceMappingURL=ranking.js.map

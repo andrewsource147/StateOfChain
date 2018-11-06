@@ -4,11 +4,7 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 import {questionActionTypes, voteQuestion} from '../app/actions/questionActions'
 import { voteAnswer } from "../app/actions/answerActions";
-import { voteQuestion } from '../app/actions/questionActions'
-import {voteAnswer} from "../app/actions/answerActions";
-import {voteUser} from "../app/actions/userActions";
-
-
+import { voteUser } from "../app/actions/userActions";
 
 class Question extends Component {
   constructor(props) {

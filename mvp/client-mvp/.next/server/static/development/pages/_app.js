@@ -97,13 +97,13 @@ module.exports =
 /*!**************************************!*\
   !*** ./app/actions/answerActions.js ***!
   \**************************************/
-/*! exports provided: answerActionTypes, setAnswer, updateAnswerVote, voteAnswer, setLoading */
+/*! exports provided: answerActionTypes, setAnswers, updateAnswerVote, voteAnswer, setLoading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "answerActionTypes", function() { return answerActionTypes; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAnswer", function() { return setAnswer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAnswers", function() { return setAnswers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateAnswerVote", function() { return updateAnswerVote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "voteAnswer", function() { return voteAnswer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLoading", function() { return setLoading; });
@@ -114,7 +114,7 @@ var answerActionTypes = {
   UPDATE_ANSWER_VOTE: 'UPDATE_ANSWER_VOTE',
   SET_LOADING: 'SET_LOADING'
 };
-function setAnswer(answers) {
+function setAnswers(answers) {
   return {
     type: answerActionTypes.SET_ANSWERS,
     payload: answers
@@ -151,27 +151,48 @@ function setLoading(isLoading) {
 /*!****************************************!*\
   !*** ./app/actions/questionActions.js ***!
   \****************************************/
-/*! exports provided: questionActionTypes, setQuestions, updateQuestionVote, voteQuestion, setLoading */
+/*! exports provided: questionActionTypes, submitQuestion, setQuestions, setQuestion, updateQuestionVote, voteQuestion, setLoading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "questionActionTypes", function() { return questionActionTypes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "submitQuestion", function() { return submitQuestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setQuestions", function() { return setQuestions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setQuestion", function() { return setQuestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateQuestionVote", function() { return updateQuestionVote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "voteQuestion", function() { return voteQuestion; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLoading", function() { return setLoading; });
 var questionActionTypes = {
   FETCH_QUESTIONS: 'FETCH_QUESTIONS',
+  FETCH_QUESTION: 'FETCH_QUESTION',
   SET_QUESTIONS: 'SET_QUESTIONS',
+  SET_QUESTION: 'SET_QUESTION',
+  SUBMIT_QUESTION: 'SUBMIT_QUESTION',
   VOTE_QUESTION: 'VOTE_QUESTION',
   UPDATE_QUESTION_VOTE: 'UPDATE_QUESTION_VOTE',
   SET_LOADING: 'SET_LOADING'
 };
+function submitQuestion(title, content, address) {
+  return {
+    type: questionActionTypes.SET_QUESTION,
+    payload: {
+      title: title,
+      content: content,
+      address: address
+    }
+  };
+}
 function setQuestions(questions) {
   return {
     type: questionActionTypes.SET_QUESTIONS,
     payload: questions
+  };
+}
+function setQuestion(question) {
+  return {
+    type: questionActionTypes.SET_QUESTION,
+    payload: question
   };
 }
 function updateQuestionVote(questionId, isUpvote) {
@@ -268,17 +289,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  answers: [{
-    id: 1,
-    content: 'An answer for a question',
-    user: '0x9559034c287a0e73a9a68288bc27eb8189427aa1',
-    votes: 1
-  }, {
-    id: 2,
-    content: 'An answer for a question 2',
-    user: '0x9559034c287a0e73a9a68288bc27eb81835j7aa1',
-    votes: 3
-  }],
+  answers: [],
   isLoading: false
 };
 function answerReducer() {
@@ -367,25 +378,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var initialState = {
-  questions: [{
-    id: 0,
-    title: 'Just a question',
-    content: 'I dont know how next.js work',
-    href: '',
-    created: '2018-01-19 03:14:07',
-    user: '0x9559034c287a0e73a9a68288bc27eb8189427aa1',
-    votes: 10,
-    answers: 9
-  }, {
-    id: 1,
-    title: 'What is Next.js',
-    content: 'I dont know how next.js work',
-    href: '',
-    created: '2018-01-20 02:07:18',
-    user: '0xd1946aeffc2d053b76fab96117b6f2c7bf395e32',
-    votes: 2,
-    answers: 1
-  }],
+  questions: [],
+  selectedQuestion: null,
   isLoading: false
 };
 function questionReducer() {
@@ -396,6 +390,11 @@ function questionReducer() {
     case _actions_questionActions__WEBPACK_IMPORTED_MODULE_0__["questionActionTypes"].SET_QUESTIONS:
       return _objectSpread({}, state, {
         questions: action.payload
+      });
+
+    case _actions_questionActions__WEBPACK_IMPORTED_MODULE_0__["questionActionTypes"].SET_QUESTION:
+      return _objectSpread({}, state, {
+        selectedQuestion: action.payload
       });
 
     case _actions_questionActions__WEBPACK_IMPORTED_MODULE_0__["questionActionTypes"].UPDATE_QUESTION_VOTE:
@@ -515,22 +514,26 @@ __webpack_require__.r(__webpack_exports__);
 
 var _marked =
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchAnswers),
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(voteAnswerSaga),
     _marked2 =
-/*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(voteAnswer),
-    _marked3 =
 /*#__PURE__*/
 _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(answerWatcher);
 
 
 
 
-function fetchAnswers() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchAnswers$(_context) {
+function voteAnswerSaga(action) {
+  var _action$payload, answerId, isUpvote;
+
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function voteAnswerSaga$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _action$payload = action.payload, answerId = _action$payload.answerId, isUpvote = _action$payload.isUpvote;
+          _context.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_answerActions__WEBPACK_IMPORTED_MODULE_2__["updateAnswerVote"])(answerId, isUpvote));
+
+        case 3:
         case "end":
           return _context.stop();
       }
@@ -538,43 +541,20 @@ function fetchAnswers() {
   }, _marked, this);
 }
 
-function voteAnswer(action) {
-  var _action$payload, answerId, isUpvote;
-
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function voteAnswer$(_context2) {
+function answerWatcher() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function answerWatcher$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _action$payload = action.payload, answerId = _action$payload.answerId, isUpvote = _action$payload.isUpvote;
-          _context2.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_answerActions__WEBPACK_IMPORTED_MODULE_2__["updateAnswerVote"])(answerId, isUpvote));
+          _context2.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_answerActions__WEBPACK_IMPORTED_MODULE_2__["answerActionTypes"].VOTE_ANSWER, voteAnswerSaga);
 
-        case 3:
+        case 2:
         case "end":
           return _context2.stop();
       }
     }
   }, _marked2, this);
-}
-
-function answerWatcher() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function answerWatcher$(_context3) {
-    while (1) {
-      switch (_context3.prev = _context3.next) {
-        case 0:
-          _context3.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_answerActions__WEBPACK_IMPORTED_MODULE_2__["answerActionTypes"].FETCH_ANSWERS, fetchAnswers);
-
-        case 2:
-          _context3.next = 4;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_answerActions__WEBPACK_IMPORTED_MODULE_2__["answerActionTypes"].VOTE_ANSWER, voteAnswer);
-
-        case 4:
-        case "end":
-          return _context3.stop();
-      }
-    }
-  }, _marked3, this);
 }
 
 /***/ }),
@@ -639,26 +619,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
 /* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _actions_questionActions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions/questionActions */ "./app/actions/questionActions.js");
+/* harmony import */ var _actions_answerActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/answerActions */ "./app/actions/answerActions.js");
+/* harmony import */ var _services_questionService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/questionService */ "./app/services/questionService.js");
 
 
 var _marked =
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchQuestions),
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchQuestionsSaga),
     _marked2 =
 /*#__PURE__*/
-_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(voteQuestion),
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(fetchQuestionSaga),
     _marked3 =
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(submitQuestionSaga),
+    _marked4 =
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(voteQuestionSaga),
+    _marked5 =
 /*#__PURE__*/
 _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(questionWatcher);
 
 
 
 
-function fetchQuestions() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchQuestions$(_context) {
+
+
+function fetchQuestionsSaga() {
+  var response;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchQuestionsSaga$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _context.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_services_questionService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchQuestions);
+
+        case 2:
+          response = _context.sent;
+          _context.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["setQuestions"])(response.data));
+
+        case 5:
         case "end":
           return _context.stop();
       }
@@ -666,18 +666,25 @@ function fetchQuestions() {
   }, _marked, this);
 }
 
-function voteQuestion(action) {
-  var _action$payload, questionId, isUpvote;
-
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function voteQuestion$(_context2) {
+function fetchQuestionSaga(action) {
+  var response;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function fetchQuestionSaga$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
-          _action$payload = action.payload, questionId = _action$payload.questionId, isUpvote = _action$payload.isUpvote;
-          _context2.next = 3;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["updateQuestionVote"])(questionId, isUpvote));
+          _context2.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_services_questionService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchQuestion, action.payload);
 
-        case 3:
+        case 2:
+          response = _context2.sent;
+          _context2.next = 5;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["setQuestion"])(response.data.question));
+
+        case 5:
+          _context2.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_answerActions__WEBPACK_IMPORTED_MODULE_3__["setAnswers"])(response.data.answer));
+
+        case 7:
         case "end":
           return _context2.stop();
       }
@@ -685,24 +692,86 @@ function voteQuestion(action) {
   }, _marked2, this);
 }
 
-function questionWatcher() {
-  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function questionWatcher$(_context3) {
+function submitQuestionSaga(action) {
+  var _action$payload, title, content, address, response, questionResponse;
+
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function submitQuestionSaga$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
-          _context3.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].FETCH_QUESTIONS, fetchQuestions);
+          _action$payload = action.payload, title = _action$payload.title, content = _action$payload.content, address = _action$payload.address;
+          _context3.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_services_questionService__WEBPACK_IMPORTED_MODULE_4__["default"].submitQuestion, title, content, address);
 
-        case 2:
-          _context3.next = 4;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].VOTE_QUESTION, voteQuestion);
+        case 3:
+          response = _context3.sent;
 
-        case 4:
+          if (!(response.status === 'success')) {
+            _context3.next = 10;
+            break;
+          }
+
+          _context3.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])(_services_questionService__WEBPACK_IMPORTED_MODULE_4__["default"].fetchQuestions);
+
+        case 7:
+          questionResponse = _context3.sent;
+          _context3.next = 10;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["setQuestions"])(questionResponse.data));
+
+        case 10:
         case "end":
           return _context3.stop();
       }
     }
   }, _marked3, this);
+}
+
+function voteQuestionSaga(action) {
+  var _action$payload2, questionId, isUpvote;
+
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function voteQuestionSaga$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _action$payload2 = action.payload, questionId = _action$payload2.questionId, isUpvote = _action$payload2.isUpvote;
+          _context4.next = 3;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(Object(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["updateQuestionVote"])(questionId, isUpvote));
+
+        case 3:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, _marked4, this);
+}
+
+function questionWatcher() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function questionWatcher$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].FETCH_QUESTIONS, fetchQuestionsSaga);
+
+        case 2:
+          _context5.next = 4;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].FETCH_QUESTION, fetchQuestionSaga);
+
+        case 4:
+          _context5.next = 6;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].VOTE_QUESTION, voteQuestionSaga);
+
+        case 6:
+          _context5.next = 8;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])(_actions_questionActions__WEBPACK_IMPORTED_MODULE_2__["questionActionTypes"].SUBMIT_QUESTION, submitQuestionSaga);
+
+        case 8:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, _marked5, this);
 }
 
 /***/ }),
@@ -1119,6 +1188,54 @@ var EthereumServices = function EthereumServices() {
   this.stackContract = new this.rpc.eth.Contract(STACKVOTES_ABI, CONFIG_NETWORK.stackAddr);
   this.kycContract = new this.rpc.eth.Contract(KYC_ABI, CONFIG_NETWORK.kycAddr);
 };
+
+
+
+/***/ }),
+
+/***/ "./app/services/questionService.js":
+/*!*****************************************!*\
+  !*** ./app/services/questionService.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return questionService; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var questionService = function questionService() {
+  _classCallCheck(this, questionService);
+};
+
+_defineProperty(questionService, "fetchQuestions", function () {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('http://0.0.0.0:3001/questions').then(function (response) {
+    return response.data;
+  });
+});
+
+_defineProperty(questionService, "fetchQuestion", function (questionId) {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://0.0.0.0:3001/question/".concat(questionId)).then(function (response) {
+    return response.data;
+  });
+});
+
+_defineProperty(questionService, "submitQuestion", function (title, content, address) {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("http://0.0.0.0:3001/submit/question", {
+    title: title,
+    content: content,
+    address: address
+  }).then(function (response) {
+    return response.data;
+  });
+});
 
 
 
@@ -1698,7 +1815,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_redux_saga__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_redux_saga__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../store */ "./store.js");
 
-var _jsxFileName = "/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/client-mvp/pages/_app.js";
+var _jsxFileName = "/Users/ngoxuantrung/projects/StateOfChain/mvp/client-mvp/pages/_app.js";
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1893,6 +2010,17 @@ module.exports = __webpack_require__(/*! ./pages/_app.js */"./pages/_app.js");
 /***/ (function(module, exports) {
 
 module.exports = require("@babel/runtime/regenerator");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
 
 /***/ }),
 

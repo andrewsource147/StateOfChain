@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import { voteQuestion } from '../app/actions/questionActions'
 import {voteAnswer} from "../app/actions/answerActions";
 import {voteUser} from "../app/actions/userActions";
+import UserAddress from "./userAddress"
 
 
 
@@ -41,7 +42,8 @@ class Question extends Component {
   render() {
     const question = this.props.question.questions[this.props.router.query.id]
     return (
-      <Layout>
+      <Layout dispatch={this.props.dispatch}>
+        <UserAddress />
         {this.props.user.txs.length > 0 && (
           <div>
             <h1>Your transactions</h1>

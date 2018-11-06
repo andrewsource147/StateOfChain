@@ -147,6 +147,43 @@ function setLoading(isLoading) {
 
 /***/ }),
 
+/***/ "./app/actions/commonActions.js":
+/*!**************************************!*\
+  !*** ./app/actions/commonActions.js ***!
+  \**************************************/
+/*! exports provided: checkMetamaskInstall, updateMetamaskAccount, throwMetamaskError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkMetamaskInstall", function() { return checkMetamaskInstall; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateMetamaskAccount", function() { return updateMetamaskAccount; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "throwMetamaskError", function() { return throwMetamaskError; });
+function checkMetamaskInstall() {
+  return {
+    type: "COMMON.CHECK_METAMASK_INSTALL"
+  };
+}
+function updateMetamaskAccount(address, vote) {
+  return {
+    type: "COMMON.UPDATE_METAMASK_ACCOUNT",
+    payload: {
+      address: address,
+      vote: vote
+    }
+  };
+}
+function throwMetamaskError(err) {
+  return {
+    type: "COMMON.THROW_METAMASK_ERROR",
+    payload: {
+      err: err
+    }
+  };
+}
+
+/***/ }),
+
 /***/ "./app/actions/questionActions.js":
 /*!****************************************!*\
   !*** ./app/actions/questionActions.js ***!
@@ -322,6 +359,65 @@ function answerReducer() {
 
 /***/ }),
 
+/***/ "./app/reducers/commonReducer.js":
+/*!***************************************!*\
+  !*** ./app/reducers/commonReducer.js ***!
+  \***************************************/
+/*! exports provided: initialState, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var initialState = {
+  user: {
+    error: "",
+    address: "",
+    vote: 0
+  }
+};
+
+function commonReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case "COMMON.UPDATE_METAMASK_ACCOUNT":
+      var _action$payload = action.payload,
+          address = _action$payload.address,
+          vote = _action$payload.vote;
+      var user = {
+        error: "",
+        address: address,
+        vote: vote
+      };
+      return _objectSpread({}, state, {
+        user: user
+      });
+
+    case "COMMON.THROW_METAMASK_ERROR":
+      {
+        var err = action.payload.err;
+        var user = state.user;
+        user.error = err;
+        return _objectSpread({}, state, {
+          user: user
+        });
+      }
+
+    default:
+      return state;
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (commonReducer);
+
+/***/ }),
+
 /***/ "./app/reducers/index.js":
 /*!*******************************!*\
   !*** ./app/reducers/index.js ***!
@@ -336,6 +432,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _questionReducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./questionReducer */ "./app/reducers/questionReducer.js");
 /* harmony import */ var _answerReducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./answerReducer */ "./app/reducers/answerReducer.js");
 /* harmony import */ var _userReducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./userReducer */ "./app/reducers/userReducer.js");
+/* harmony import */ var _commonReducer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./commonReducer */ "./app/reducers/commonReducer.js");
+
 
 
 
@@ -343,7 +441,8 @@ __webpack_require__.r(__webpack_exports__);
 var rootReducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   question: _questionReducer__WEBPACK_IMPORTED_MODULE_1__["default"],
   answer: _answerReducer__WEBPACK_IMPORTED_MODULE_2__["default"],
-  user: _userReducer__WEBPACK_IMPORTED_MODULE_3__["default"]
+  user: _userReducer__WEBPACK_IMPORTED_MODULE_3__["default"],
+  common: _commonReducer__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (rootReducer);
 
@@ -579,6 +678,134 @@ function answerWatcher() {
 
 /***/ }),
 
+/***/ "./app/sagas/commonSaga.js":
+/*!*********************************!*\
+  !*** ./app/sagas/commonSaga.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return commonWatcher; });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-saga/effects */ "redux-saga/effects");
+/* harmony import */ var redux_saga_effects__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_web3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/web3 */ "./app/services/web3/index.js");
+/* harmony import */ var _actions_commonActions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../actions/commonActions */ "./app/actions/commonActions.js");
+/* harmony import */ var _services_ethereum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/ethereum */ "./app/services/ethereum.js");
+
+
+var _marked =
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(checMetamaskInstall),
+    _marked2 =
+/*#__PURE__*/
+_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(commonWatcher);
+
+
+
+
+
+
+function checMetamaskInstall(action) {
+  var web3Instance, networkId, address, ethereum, vote;
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function checMetamaskInstall$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          web3Instance = Object(_services_web3__WEBPACK_IMPORTED_MODULE_2__["newWeb3Instance"])();
+
+          if (!(web3Instance === false)) {
+            _context.next = 5;
+            break;
+          }
+
+          _context.next = 4;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_actions_commonActions__WEBPACK_IMPORTED_MODULE_3__["throwMetamaskError"]("Metamask is not installed"));
+
+        case 4:
+          return _context.abrupt("return");
+
+        case 5:
+          _context.next = 7;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])([web3Instance, web3Instance.getNetworkId]);
+
+        case 7:
+          networkId = _context.sent;
+
+          if (!(networkId !== 3)) {
+            _context.next = 12;
+            break;
+          }
+
+          _context.next = 11;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_actions_commonActions__WEBPACK_IMPORTED_MODULE_3__["throwMetamaskError"]("Network is not in ropsten network"));
+
+        case 11:
+          return _context.abrupt("return");
+
+        case 12:
+          _context.prev = 12;
+          _context.next = 15;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])([web3Instance, web3Instance.getCoinbase]);
+
+        case 15:
+          address = _context.sent;
+          ethereum = new _services_ethereum__WEBPACK_IMPORTED_MODULE_4__["default"](); //check vote
+
+          _context.next = 19;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["call"])([ethereum, ethereum.getVoteUser], address);
+
+        case 19:
+          vote = _context.sent;
+          console.log({
+            address: address,
+            vote: vote
+          });
+          _context.next = 23;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_actions_commonActions__WEBPACK_IMPORTED_MODULE_3__["updateMetamaskAccount"](address, vote));
+
+        case 23:
+          return _context.abrupt("return");
+
+        case 26:
+          _context.prev = 26;
+          _context.t0 = _context["catch"](12);
+          console.log(_context.t0);
+          _context.next = 31;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["put"])(_actions_commonActions__WEBPACK_IMPORTED_MODULE_3__["throwMetamaskError"]("Cannot get address, You probably do not login Metamask"));
+
+        case 31:
+          return _context.abrupt("return");
+
+        case 32:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, _marked, this, [[12, 26]]);
+}
+
+function commonWatcher() {
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function commonWatcher$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["takeLatest"])("COMMON.CHECK_METAMASK_INSTALL", checMetamaskInstall);
+
+        case 2:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, _marked2, this);
+}
+
+/***/ }),
+
 /***/ "./app/sagas/index.js":
 /*!****************************!*\
   !*** ./app/sagas/index.js ***!
@@ -596,11 +823,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _questionSaga__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./questionSaga */ "./app/sagas/questionSaga.js");
 /* harmony import */ var _answerSaga__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./answerSaga */ "./app/sagas/answerSaga.js");
 /* harmony import */ var _userSaga__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./userSaga */ "./app/sagas/userSaga.js");
+/* harmony import */ var _commonSaga__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./commonSaga */ "./app/sagas/commonSaga.js");
 
 
 var _marked =
 /*#__PURE__*/
 _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(rootSaga);
+
 
 
 
@@ -612,7 +841,7 @@ function rootSaga() {
       switch (_context.prev = _context.next) {
         case 0:
           _context.next = 2;
-          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_questionSaga__WEBPACK_IMPORTED_MODULE_2__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_answerSaga__WEBPACK_IMPORTED_MODULE_3__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_userSaga__WEBPACK_IMPORTED_MODULE_4__["default"])]);
+          return Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["all"])([Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_questionSaga__WEBPACK_IMPORTED_MODULE_2__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_answerSaga__WEBPACK_IMPORTED_MODULE_3__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_userSaga__WEBPACK_IMPORTED_MODULE_4__["default"]), Object(redux_saga_effects__WEBPACK_IMPORTED_MODULE_1__["fork"])(_commonSaga__WEBPACK_IMPORTED_MODULE_5__["default"])]);
 
         case 2:
         case "end":

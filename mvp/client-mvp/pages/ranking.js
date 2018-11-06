@@ -9,7 +9,7 @@ class Ranking extends Component {
   }
   render() {
     return (
-      <Layout>
+      <Layout dispatch={this.props.dispatch}>
         <h1>Ranking</h1>
         <div className={"ranking"}>
           <div>

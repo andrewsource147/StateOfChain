@@ -1,18 +1,32 @@
-
 import { withRouter } from 'next/router'
 import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
+<<<<<<< HEAD
 import { voteQuestion } from '../app/actions/questionActions'
 import {voteAnswer} from "../app/actions/answerActions";
 import {voteUser} from "../app/actions/userActions";
 import UserAddress from "./userAddress"
-
-
+=======
+import {questionActionTypes, voteQuestion} from '../app/actions/questionActions'
+import { voteAnswer } from "../app/actions/answerActions";
+import { voteUser } from "../app/actions/userActions";
+>>>>>>> 9ae8ffb4597fb3b8431d73db93aed2be5222b6b2
 
 class Question extends Component {
+  constructor(props) {
+    super(props);
 
-  onVoteQuestion(questionId, isUpvote, user) {
+    this.state = {
+      questionId: props.router.query.id
+    }
+  }
+
+  componentDidMount = () => {
+    this.props.dispatch({ type: questionActionTypes.FETCH_QUESTION, payload: this.state.questionId });
+  }
+
+  onVoteQuestion(questionId, isUpvote) {
     this.props.dispatch(voteQuestion(questionId, isUpvote))
     //submit to blockchain
     if (isUpvote){
@@ -31,7 +45,7 @@ class Question extends Component {
     }
   }
 
-  getListTxs = () =>{ 
+  getListTxs = () =>{
     var listTxs = this.props.user.txs.map(txsHash => {
       return <div key={txsHash}>
         <a href={"https://ropsten.etherscan.io/tx/" + txsHash} target="_blank">{txsHash}</a>
@@ -40,7 +54,8 @@ class Question extends Component {
     return listTxs
   }
   render() {
-    const question = this.props.question.questions[this.props.router.query.id]
+    const question = this.props.question.selectedQuestion
+
     return (
       <Layout dispatch={this.props.dispatch}>
         <UserAddress />
@@ -52,6 +67,8 @@ class Question extends Component {
             </div>
           </div>
         )}
+
+        {question &&
         <div>
           <h1>Question #{this.props.router.query.id}: {question.title}</h1>
           <div>
@@ -61,11 +78,11 @@ class Question extends Component {
           </div>
           <p>{question.content}</p>
         </div>
+        }
 
         <div>
           <div>
-            <h3>Answer</h3>
-            <div>User:</div>
+            <h3>Answers</h3>
             {this.props.answer.answers.map((answer, i) => (
               <div key={i}>
                 <div>

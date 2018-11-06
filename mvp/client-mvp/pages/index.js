@@ -3,12 +3,9 @@ import Link from 'next/link'
 import '../app/assets/question-list.scss'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-<<<<<<< HEAD
 // import {setQuestions} from '../app/actions/questionActions'
 import UserAddress from "./userAddress"
-=======
 import { questionActionTypes } from '../app/actions/questionActions'
->>>>>>> 9ae8ffb4597fb3b8431d73db93aed2be5222b6b2
 
 class QuestionList extends Component {
   constructor(props) {
@@ -58,10 +55,7 @@ class QuestionList extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <Layout dispatch={this.props.dispatch}>        
-=======
-      <Layout>
+      <Layout dispatch={this.props.dispatch}>
         <div>
           <h3>Submit your question</h3>
           <form>
@@ -80,7 +74,6 @@ class QuestionList extends Component {
             <input type={"button"} value={"Submit"} onClick={this.handleSubmitQuestion}/>
           </form>
         </div>
->>>>>>> 9ae8ffb4597fb3b8431d73db93aed2be5222b6b2
         <div className={"question-list"}>
           <UserAddress />
           <h1 className={"question-list__title"}>Question List</h1>

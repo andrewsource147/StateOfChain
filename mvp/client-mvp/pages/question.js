@@ -2,16 +2,10 @@ import { withRouter } from 'next/router'
 import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
-<<<<<<< HEAD
-import { voteQuestion } from '../app/actions/questionActions'
-import {voteAnswer} from "../app/actions/answerActions";
-import {voteUser} from "../app/actions/userActions";
-import UserAddress from "./userAddress"
-=======
 import {questionActionTypes, voteQuestion} from '../app/actions/questionActions'
 import { voteAnswer } from "../app/actions/answerActions";
 import { voteUser } from "../app/actions/userActions";
->>>>>>> 9ae8ffb4597fb3b8431d73db93aed2be5222b6b2
+import UserAddress from "./userAddress"
 
 class Question extends Component {
   constructor(props) {
@@ -26,7 +20,7 @@ class Question extends Component {
     this.props.dispatch({ type: questionActionTypes.FETCH_QUESTION, payload: this.state.questionId });
   }
 
-  onVoteQuestion(questionId, isUpvote) {
+  onVoteQuestion(questionId, isUpvote, user) {
     this.props.dispatch(voteQuestion(questionId, isUpvote))
     //submit to blockchain
     if (isUpvote){
@@ -73,8 +67,8 @@ class Question extends Component {
           <h1>Question #{this.props.router.query.id}: {question.title}</h1>
           <div>
             <div style={{marginBottom: 5}}>{question.votes} votes</div>
-            <span style={{marginRight: 10}} onClick={() => this.onVoteQuestion(question.id, true, question.user)}>Upvote</span>
-            <span onClick={() => this.onVoteQuestion(question.id, false,  question.user)}>Downvote</span>
+            <span style={{marginRight: 10}} onClick={() => this.onVoteQuestion(question.id, true, question.address)}>Upvote</span>
+            <span onClick={() => this.onVoteQuestion(question.id, false,  question.address)}>Downvote</span>
           </div>
           <p>{question.content}</p>
         </div>
@@ -87,8 +81,8 @@ class Question extends Component {
               <div key={i}>
                 <div>
                   <div style={{marginBottom: 5, marginTop: 10}}>{answer.votes} votes</div>
-                  <span style={{marginRight: 10}} onClick={() => this.onVoteAnswer(answer.id, true, question.user)}>Upvote</span>
-                  <span onClick={() => this.onVoteAnswer(answer.id, false, question.user)}>Downvote</span>
+                  <span style={{marginRight: 10}} onClick={() => this.onVoteAnswer(answer.id, true, question.address)}>Upvote</span>
+                  <span onClick={() => this.onVoteAnswer(answer.id, false, question.address)}>Downvote</span>
                 </div>
                 <p>{answer.content}</p>
               </div>

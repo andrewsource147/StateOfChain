@@ -62,3 +62,7 @@ ReferenceError: resolve is not defined
     at Statement.<anonymous> (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:102:13)
 --> in Database#run('UPDATE tbl_question SET votes = ? WHERE id = ?', [ 1, '1' ], [Function])
     at Statement.db.get (/Users/andrewnguyen/Documents/personal/StateOfChain/mvp/server-mvp/persist/sqlite/sqlitePersist.js:97:17) accepted at 2018-11-02T06:13:25.313Z 
+14:13:30.785 INFO  errorLog SQLITE_ERROR: table tbl_question already exists
+Error: SQLITE_ERROR: table tbl_question already exists accepted at 2018-11-06T07:13:30.785Z 
+14:13:30.790 INFO  errorLog SQLITE_ERROR: table tbl_answer already exists
+Error: SQLITE_ERROR: table tbl_answer already exists accepted at 2018-11-06T07:13:30.790Z 

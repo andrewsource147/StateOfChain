@@ -1,10 +1,7 @@
 import Layout from '../app/components/Layout.js'
 import Link from 'next/link'
-import '../app/assets/question-list.scss'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-// import {setQuestions} from '../app/actions/questionActions'
-import UserAddress from "./userAddress"
 import { questionActionTypes } from '../app/actions/questionActions'
 
 class QuestionList extends Component {
@@ -74,21 +71,56 @@ class QuestionList extends Component {
             <input type={"button"} value={"Submit"} onClick={this.handleSubmitQuestion}/>
           </form>
         </div>
-        <div className={"question-list"}>
-          <UserAddress />
-          <h1 className={"question-list__title"}>Question List</h1>
-          <div className={"question-list__container"}>
+
+        <div className={"questions"}>
+          <div className={"questions__header"}>
+            <div className={"questions__header-top"}>
+              <div className={"questions__header-title"}>Top Questions</div>
+              <div className={"questions__header-button"}>Ask Question</div>
+            </div>
+
+            <div className={"questions__header-bot"}>
+              <div className={"questions__header-count"}>1,600 questions</div>
+              <div className={"questions__header-sort"}>
+                <div className={"questions__header-sort-item"}>Interesting</div>
+                <div className={"questions__header-sort-item"}>344 featured</div>
+                <div className={"questions__header-sort-item"}>Hot</div>
+                <div className={"questions__header-sort-item"}>Week</div>
+                <div className={"questions__header-sort-item"}>Month</div>
+              </div>
+            </div>
+          </div>
+
+          <div className={"questions__body"}>
+
             {this.props.question.questions.map((question, i) => (
-              <div className={"question-list__item"} key={i}>
-                <div className={"question-list__item-vote"}>{question.votes} votes</div>
-                <div className={"question-list__item-answer"}>{question.answers || 0} answers</div>
-                <Link href={`/question?id=${question.id}`}>
-                  <a className={"question-list__item-link"}>{question.title}</a>
-                </Link>
-                <div className={"question-list__item-created"}>asked at {question.timestamp}</div>
-                <div className={"question-list__item-address"}>by {question.address}</div>
+              <div className={"questions__body-item"} key={i}>
+                <div className={"questions__body-item-div"}>
+                  <div className={"questions__body-item-data"}>
+                    <div className={"questions__body-item-count"}>{question.votes || 0}</div>
+                    <div>votes</div>
+                  </div>
+                  <div className={"questions__body-item-data"}>
+                    <div className={"questions__body-item-count"}>{question.answers || 0}</div>
+                    <div>answers</div>
+                  </div>
+                  <div className={"questions__body-item-data"}>
+                    <div className={"questions__body-item-count"}>{question.views || 0}</div>
+                    <div>views</div>
+                  </div>
+                </div>
+                <div className={"questions__body-item-div"}>
+                  <Link href={`/question?id=${question.id}`}>
+                    <a className={"questions__body-item-title"}>{question.title}</a>
+                  </Link>
+                  <div className={"questions__body-item-info"}>
+                    <span>asked {question.timestamp} by </span>
+                    <span className={"bold"}>{question.address}</span>
+                  </div>
+                </div>
               </div>
             ))}
+
           </div>
         </div>
       </Layout>

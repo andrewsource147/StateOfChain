@@ -10,16 +10,18 @@ class Ranking extends Component {
   render() {
     return (
       <Layout dispatch={this.props.dispatch}>
-        <h1>Ranking</h1>
-        <div className={"ranking"}>
-          <div>
-            {this.props.user.users.map((user, i) => (
-              <div key={i} style={{marginBottom: 10}}>
-                <div>ID: {user.id}</div>
-                <div>Address: {user.address}</div>
-                <div>Votes: {user.votes}</div>
-              </div>
-            ))}
+        <div id="ranking">
+          <h1>Ranking</h1>
+          <div className={"ranking"}>
+            <div>
+              {this.props.user.users.map((user, i) => (
+                <div key={i} style={{marginBottom: 10}}>
+                  <div>ID: {user.id}</div>
+                  <div>Address: {user.address}</div>
+                  <div>Votes: {user.votes}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </Layout>

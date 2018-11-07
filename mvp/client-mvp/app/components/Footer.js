@@ -1,5 +1,7 @@
 const Footer = () => (
-  <div></div>
+  <div className={"footer"}>
+    © Copyright 2018 StackChain. All rights reserved.
+  </div>
 )
 
 export default Footer

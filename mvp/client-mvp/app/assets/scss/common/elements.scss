@@ -1,6 +1,11 @@
 body {
   font-family: $font-opensans;
   color: $black-light;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .bold {

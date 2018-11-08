@@ -3,18 +3,19 @@ import {Component} from 'react'
 import {connect} from 'react-redux'
 import {updateUserVotes} from "../app/actions/userActions.js"
 import {toSvg} from 'jdenticon'
+import { withRouter } from 'next/router'
 
 class Ranking extends Component {
   constructor(props) {
-      super(props)
-      const users = props.user.users
-      const newArray = users.slice()
-      newArray.sort(function(a, b){
-        return b.votes - a.votes
-      })
-      this.state = {
-        orderArr: newArray,
-      }
+    super(props)
+    const users = props.user.users
+    const newArray = users.slice()
+    newArray.sort(function(a, b){
+      return b.votes - a.votes
+    })
+    this.state = {
+      orderArr: newArray,
+    }
   }
   componentDidMount = ()=>{ 
     this.props.dispatch(updateUserVotes(this.props.user.users))
@@ -30,7 +31,7 @@ class Ranking extends Component {
 
   getListRow = () => {
     var rawNormalRank = this.state.orderArr.slice(0, -3)
-    rawNormalRank = this.state.orderArr.slice()
+    // rawNormalRank = this.state.orderArr.slice()
     var row = []
     var normalRank = []
     for (let i = 0; i < rawNormalRank.length; i++) {
@@ -51,9 +52,19 @@ class Ranking extends Component {
     return normalRank
   }
 
+  getShortAddr = (address) => {
+    let result = address.slice(0, 8) + "..." + address.slice(-6)
+    let link = "https://ropsten.etherscan.io/address/" + address
+    return (
+      <a className={"link-account"} href={link} target="_blank">
+        {result}
+      </a>
+    )
+  }
+
   render() {
     return (
-      <Layout dispatch={this.props.dispatch}>
+      <Layout dispatch={this.props.dispatch} path={this.props.router.pathname}>
         <div id="ranking">
           <h1>Ranking</h1>
           <div className={"questions__header"}>
@@ -88,11 +99,11 @@ class Ranking extends Component {
                     <div className={"img"}>
                       <canvas data-jdenticon-value={`${user.address}`} width="55" height="55" className="avatar-canvas">
                       </canvas>
-                      <div className={"degree"}></div>
+                      <div className={"degree"}>{i == 0 ? "1st" : i == 1 ? "2nd" : "3th"}</div>
                     </div>
                   </div>
-                  <div className={"name"}>{user.name ? user.name : user.id}</div>
-                  <div className={"location"}>{user.location ? user.location : "Hanoi, VietNam"}</div>
+                  <div className={"name"}>{user.address ? this.getShortAddr(user.address) : user.id}</div>
+                  {/* <div className={"location"}>{user.location ? user.location : "Hanoi, VietNam"}</div> */}
                   <div className={"vote"}>{user.votes}</div>
                   <div>{user.votes > 1 ? "Reputations" : "Reputation"}</div>
                 </div>
@@ -109,9 +120,9 @@ class Ranking extends Component {
                         </div>
                       </div>
                       <div className={"user-info"}>
-                        <div className={"name"}>{user.name ? user.name : user.id}</div>
-                        <div className={"location"}>{user.location ? user.location : "Hanoi, VietNam"}</div>
-                        <div className={"vote"}>{user.votes}</div>
+                        <div className={"name"}>{user.address ? this.getShortAddr(user.address) : user.id}</div>
+                        {/* <div className={"location"}>{user.location ? user.location : "Hanoi, VietNam"}</div> */}
+                        <div className={"normal-vote"}>{user.votes}</div>
                       </div>
                     </div>
                   ))}
@@ -125,5 +136,4 @@ class Ranking extends Component {
   }
 }
 
-export default connect(state => state)(Ranking)
-
+export default connect(state => state)(withRouter(Ranking))

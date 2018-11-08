@@ -63,7 +63,7 @@ class QuestionList extends Component {
 
   render() {
     return (
-      <Layout dispatch={this.props.dispatch}>
+      <Layout dispatch={this.props.dispatch} path={"/"}>
         <div className={"questions"}>
           <div className={"questions__header"}>
             <div className={"questions__header-top"}>

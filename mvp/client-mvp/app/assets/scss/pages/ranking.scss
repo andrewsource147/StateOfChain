@@ -1,5 +1,6 @@
 #ranking {
   padding: 0 25px;
+  background-color: #fafafa;
   .sub-header {
     display: flex;
     margin-top: 15px;
@@ -49,20 +50,41 @@
             }
             .degree {
               position: absolute;
-              height: 25px;
-              width: 25px;
+              height: 28px;
+              width: 28px;
               border-radius: 50%;
-              background: #eee;
+              // background: #eee;
               bottom: 6px;
-              right: -7px;
+              right: -8px;
+              color: white;
+              line-height: 28px;
+              font-size: 11px;
             }
           }
         }
+        &:first-child {
+          .degree {
+            background-color: #ef8100;  
+          }
+        }
+        &:nth-child(2) {
+          .degree {
+            background-color: #f4b403;
+          }
+        }
+        &:nth-child(3) {
+          .degree {
+            background-color: #fad348;
+          }
+        }
+
         .name, .location, .vote {
           margin-top: 10px;
         }
         .name {
-          color: #222222;
+          a {
+            color: #666666;
+          }
         }
         .location {
           color: #999999;
@@ -84,12 +106,21 @@
         }
       }
 
+      &.top-rank {
+        .user {
+          background-color: white;
+        }
+      }
+
       &.normal-rank {
         margin-top: 20px;
+        margin-bottom: 30px;
         .row {
           display: flex;
           justify-content: space-between;
           width: 100%;
+          border-bottom: 1px solid #eee;
+          margin-top: 15px;
           .user {
             widows: 200px;
             display: flex;
@@ -103,6 +134,25 @@
               .img {
                 height: 50px;
                 width: 50px;
+                display: flex;
+                justify-content: center;
+              }
+            }
+            .user-info {
+              .normal-vote {
+                position: relative;
+                padding-left: 10px;
+                &::before {
+                  content: "";
+                  position: absolute;
+                  height: 8px;
+                  width: 8px;
+                  background-image: url(/static/fame.svg);
+                  background-size: contain;
+                  background-position: center;
+                  left: -1px;
+                  top: 3px;
+                }
               }
             }
           }

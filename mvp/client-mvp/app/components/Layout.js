@@ -10,11 +10,22 @@ export default class Layout extends Component {
     this.props.dispatch(checkMetamaskInstall())
   }
 
+  isActive = (path) => {
+    return this.props.path == path
+  }
+
   render() {
     return (
       <div>
         <Header/>
-        {this.props.children}
+        <div className={"content-layout"}>
+          <div className={"side-bar"}>
+            <h2>Stackchain</h2>
+            <div className={`item ${this.isActive("/") ? "active" : ""}`}><a href="/">Stack Overflow</a></div>
+            <div className={`item ${this.isActive("/ranking") ? "active" : ""}`}><a href="/ranking">Users</a></div>
+          </div>
+          <div>{this.props.children}</div>
+        </div>
         <Footer/>
       </div>
     )}

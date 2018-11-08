@@ -1,0 +1,28 @@
+.content-layout {
+  display: flex;
+  justify-content: center;
+  .side-bar {
+    min-width: 200px;
+    margin-top: 25px;
+    border-right: 1px solid #ccc;
+    h2 {
+      padding-left: 10px;
+      font-weight: normal;
+    }
+    .item {
+      padding: 12px 10px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      a {
+        color: #0d9e58;
+        font-size: 14px;
+      }
+      &:last-child {
+        border-top: none;
+      }
+      &.active {
+        border-left: 3px solid #0d9e58;
+      }
+    }
+  }
+}

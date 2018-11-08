@@ -1,8 +1,11 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
 import { answerActionTypes, updateAnswerVote } from "../actions/answerActions";
+import answerService from "../services/answerService";
 
 function* voteAnswerSaga(action) {
-  const { answerId, isUpvote } = action.payload
+  const { answerId, address, isUpvote } = action.payload
+
+  yield call(answerService.voteAnswer, answerId, address, isUpvote);
 
   yield put(updateAnswerVote(answerId, isUpvote));
 }

@@ -1,7 +1,7 @@
 import { takeLatest, take, put, call, fork, select, takeEvery, all, apply, cancel } from 'redux-saga/effects'
-import {newWeb3Instance} from "../services/web3"
+import {newWeb3Instance} from "../services/blockchain/web3"
 import * as commonActions from "../actions/commonActions"
-import EthereumServices from "../services/ethereum"
+import EthereumServices from "../services/blockchain/ethereum"
 
 
 function* checMetamaskInstall(action){

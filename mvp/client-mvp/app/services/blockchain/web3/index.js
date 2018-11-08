@@ -2,7 +2,7 @@
 
 
 
-import * as dapp from "./dapp"
+import * as dapp from "./dapp/index"
 
 
 export function newWeb3Instance(){

@@ -22,4 +22,14 @@ export default class questionService {
       return response.data;
     });
   }
+
+  static voteQuestion = (questionId, address, isUpvote) => {
+    return axios.post(`http://0.0.0.0:3001/vote/question`, {
+      question_id: questionId,
+      address: address,
+      is_upvotes: isUpvote
+    }).then(response => {
+      return response.data;
+    });
+  }
 }

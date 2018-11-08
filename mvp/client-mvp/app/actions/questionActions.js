@@ -37,10 +37,10 @@ export function updateQuestionVote(questionId, isUpvote) {
   }
 }
 
-export function voteQuestion(questionId, isUpvote) {
+export function voteQuestion(questionId, address, isUpvote) {
   return {
     type: questionActionTypes.VOTE_QUESTION,
-    payload: { questionId, isUpvote }
+    payload: { questionId, address, isUpvote }
   }
 }
 

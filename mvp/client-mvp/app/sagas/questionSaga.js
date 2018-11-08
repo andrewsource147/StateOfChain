@@ -34,7 +34,9 @@ function* submitQuestionSaga(action) {
 }
 
 function* voteQuestionSaga(action) {
-  const { questionId, isUpvote } = action.payload
+  const { questionId, address, isUpvote } = action.payload
+
+  yield call(questionService.voteQuestion, questionId, address, isUpvote);
 
   yield put(updateQuestionVote(questionId, isUpvote));
 }

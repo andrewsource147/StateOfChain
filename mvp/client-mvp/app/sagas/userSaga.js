@@ -1,6 +1,6 @@
 import { takeLatest, take, put, call, fork, select, takeEvery, all, apply, cancel } from 'redux-saga/effects'
-import EthereumServices from "../services/ethereum"
-import {newWeb3Instance} from "../services/web3"
+import EthereumServices from "../services/blockchain/ethereum"
+import {newWeb3Instance} from "../services/blockchain/web3"
 
 import {saveTx, saveVotes} from "../actions/userActions"
 

@@ -21,22 +21,13 @@ class Question extends Component {
   }
 
   onVoteQuestion(questionId, isUpvote, user) {
-    this.props.dispatch(voteQuestion(questionId, isUpvote))
-    //submit to blockchain
-    if (isUpvote){
-      this.props.dispatch(voteUser(user, 1))
-    }else{
-      this.props.dispatch(voteUser(user, 0))
-    }
+    this.props.dispatch(voteQuestion(questionId, user, isUpvote))
+    this.props.dispatch(voteUser(user, isUpvote))
   }
 
   onVoteAnswer(answerId, isUpvote, user) {
-    this.props.dispatch(voteAnswer(answerId, isUpvote))
-    if (isUpvote){
-      this.props.dispatch(voteUser(user, 1))
-    }else{
-      this.props.dispatch(voteUser(user, 0))
-    }
+    this.props.dispatch(voteAnswer(answerId, user, isUpvote))
+    this.props.dispatch(voteUser(user, isUpvote))
   }
 
   getListTxs = () =>{
@@ -67,8 +58,7 @@ class Question extends Component {
           <h1>Question #{this.props.router.query.id}: {question.title}</h1>
           <div>
             <div style={{marginBottom: 5}}>{question.votes} votes</div>
-            <span style={{marginRight: 10}} onClick={() => this.onVoteQuestion(question.id, true, question.address)}>Upvote</span>
-            <span onClick={() => this.onVoteQuestion(question.id, false,  question.address)}>Downvote</span>
+            <span style={{marginRight: 10}} onClick={() => this.onVoteQuestion(question.id, 1, question.address)}>Upvote</span>
           </div>
           <p>{question.content}</p>
         </div>
@@ -81,8 +71,7 @@ class Question extends Component {
               <div key={i}>
                 <div>
                   <div style={{marginBottom: 5, marginTop: 10}}>{answer.votes} votes</div>
-                  <span style={{marginRight: 10}} onClick={() => this.onVoteAnswer(answer.id, true, question.address)}>Upvote</span>
-                  <span onClick={() => this.onVoteAnswer(answer.id, false, question.address)}>Downvote</span>
+                  <span style={{marginRight: 10}} onClick={() => this.onVoteAnswer(answer.id, 1, answer.address)}>Upvote</span>
                 </div>
                 <p>{answer.content}</p>
               </div>

@@ -20,10 +20,10 @@ export function updateAnswerVote(answerId, isUpvote) {
   }
 }
 
-export function voteAnswer(answerId, isUpvote) {
+export function voteAnswer(answerId, address, isUpvote) {
   return {
     type: answerActionTypes.VOTE_ANSWER,
-    payload: { answerId, isUpvote }
+    payload: { answerId, address, isUpvote }
   }
 }
 

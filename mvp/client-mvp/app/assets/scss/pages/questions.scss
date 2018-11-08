@@ -4,7 +4,9 @@
 
   /* ================= Header ================= */
   &__header {
-
+    &-count {
+      margin-right: 15px;
+    }
   }
 
   &__header-top {
@@ -60,6 +62,10 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: all .3s;
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &:hover {
       color: $green;

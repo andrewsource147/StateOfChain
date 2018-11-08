@@ -10,7 +10,6 @@ import UserAddress from "./userAddress"
 class Question extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       questionId: props.router.query.id
     }
@@ -42,7 +41,7 @@ class Question extends Component {
     const question = this.props.question.selectedQuestion
 
     return (
-      <Layout dispatch={this.props.dispatch}>
+      <Layout dispatch={this.props.dispatch} path={this.props.router.pathname}>
         <UserAddress />
         {this.props.user.txs.length > 0 && (
           <div>

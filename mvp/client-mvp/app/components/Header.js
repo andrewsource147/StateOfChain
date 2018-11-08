@@ -1,17 +1,16 @@
 import Link from 'next/link';
-
-const linkStyle = {
-  marginRight: 15
-}
+import logo from '../assets/images/logo.svg';
 
 const Header = () => (
-  <div>
-    <Link href="/">
-      <a style={linkStyle}>Question List</a>
-    </Link>
-    <Link href="/ranking">
-      <a style={linkStyle}>Ranking</a>
-    </Link>
+  <div className={"home-header"}>
+    <div className={"home-logo"}>
+      <Link href="/">
+        <img src={logo} alt="StackChain" className={"home-logo-img"}/>
+      </Link>
+    </div>
+    <div className={"sign-in"}>
+      <div className={"text"}>Sign in</div>
+    </div>
   </div>
 )
 

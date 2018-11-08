@@ -2,6 +2,7 @@ import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import {updateUserVotes} from "../app/actions/userActions.js"
+import {toSvg} from 'jdenticon'
 
 class Ranking extends Component {
   constructor(props) {
@@ -41,14 +42,12 @@ class Ranking extends Component {
         row = []
       }
       row.push(element)
-      console.log(row.length, i + 1, rawNormalRank.length)
       if (i + 1 == rawNormalRank.length) {
         if (row.length > 0) {
           normalRank.push(row)
         }
       }
     }
-    console.log(normalRank)
     return normalRank
   }
 
@@ -87,6 +86,8 @@ class Ranking extends Component {
                 <div className={"user"} key={i} style={{marginBottom: 10}}>
                   <div className={"avatar"}>
                     <div className={"img"}>
+                      <canvas data-jdenticon-value={`${user.address}`} width="55" height="55" className="avatar-canvas">
+                      </canvas>
                       <div className={"degree"}></div>
                     </div>
                   </div>
@@ -104,6 +105,7 @@ class Ranking extends Component {
                     <div className={"user"} key={j} style={{marginBottom: 10}}>
                       <div className={"avatar"}>
                         <div className={"img"}>
+                          <canvas data-jdenticon-value={`${user.address}`} width="45" height="45" className="avatar-canvas"></canvas>
                         </div>
                       </div>
                       <div className={"user-info"}>

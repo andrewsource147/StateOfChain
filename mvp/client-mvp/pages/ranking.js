@@ -66,11 +66,11 @@ class Ranking extends Component {
     return (
       <Layout dispatch={this.props.dispatch} path={this.props.router.pathname}>
         <div id="ranking">
-          <h1>Ranking</h1>
+          {/* <h1>Ranking</h1> */}
           <div className={"questions__header"}>
             <div className={"questions__header-top"}>
-              <div className={"questions__header-title"}>Top Questions</div>
-              <div className={"questions__header-button"}>Ask Question</div>
+              <div className={"questions__header-title"}>Ranking</div>
+              {/* <div className={"questions__header-button"}>Ask Question</div> */}
             </div>
 
             <div className={"questions__header-bot"}>
@@ -109,7 +109,7 @@ class Ranking extends Component {
                 </div>
               ))}
             </div>
-            <div className={"rank normal-rank"}>
+            {this.getListRow().length > 0 && <div className={"rank normal-rank"}>
               {this.getListRow().map((row, i) => (
                 <div className={"row"} key={i}>
                   {row.map((user, j) => (
@@ -128,7 +128,7 @@ class Ranking extends Component {
                   ))}
                 </div>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
       </Layout>

@@ -1,0 +1,113 @@
+.question {
+  background-color: #fbfafb;
+  padding: 30px;
+
+  /* ================= Question ================= */
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  &__title {
+    font-size: 22px;
+    max-width: 70%;
+  }
+
+  &__item-container {
+
+  }
+
+  &__item {
+    padding: 20px 20px 40px;
+    border: solid 1px $grey-lighter;
+    background-color: white;
+    display: flex;
+
+    &--answer {
+      border: none;
+      background-color: transparent;
+    }
+  }
+
+  &__item-info {
+    width: 50px;
+  }
+
+  &__item-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: center no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 5px $grey-light;
+  }
+
+  &__item-vote {
+    font-size: 20px;
+    font-weight: 600;
+    color: $grey-darker;
+    text-align: center;
+  }
+
+  &__item-content {
+    padding-left: 20px;
+    width: calc(100% - 50px);
+  }
+
+  &__item-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__item-name {
+    font-weight: 600;
+  }
+
+  &__item-reputation {
+    font-size: 14px;
+    color: $grey-light;
+  }
+
+  &__item-metadata-container {
+    display: flex;
+  }
+
+  &__item-metadata {
+    display: flex;
+    margin-left: 20px;
+  }
+
+  &__item-metadata--light {
+    font-size: 12px;
+    color: $grey-light;
+  }
+
+  &__item-metadata--bold {
+    font-size: 12px;
+    font-weight: 600;
+    color: $grey-darker;
+    margin-left: 5px;
+  }
+
+  &__item-body {
+    font-size: 14px;
+    color: $grey-darker;
+    line-height: 23px;
+  }
+
+  /* ================= Question's Answers ================= */
+  &__answer-container {
+
+  }
+
+  &__answer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0 20px;
+    border-bottom: 1px solid $grey-slight-dark;
+  }
+}

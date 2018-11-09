@@ -7,7 +7,6 @@ import Link from 'next/link'
 export default class Layout extends Component {
   componentDidMount = () => {
     //check metamask install and in ropsten network
-    console.log(this.props)
     this.props.dispatch(checkMetamaskInstall())
   }
 

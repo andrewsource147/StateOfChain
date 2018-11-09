@@ -68,17 +68,17 @@ class QuestionList extends Component {
           <div className={"questions__header"}>
             <div className={"questions__header-top"}>
               <div className={"questions__header-title"}>Top Questions</div>
-              <div className={"questions__header-button"} onClick={this.handleOpenModal}>Ask Question</div>
+              <div className={"common__ask-question"} onClick={this.handleOpenModal}>Ask Question</div>
             </div>
 
             <div className={"questions__header-bot"}>
               <div className={"questions__header-count"}>{this.props.question.questions.length} questions</div>
-              <div className={"questions__header-sort"}>
-                <div className={"questions__header-sort-item"}>Interesting</div>
-                <div className={"questions__header-sort-item"}>344 featured</div>
-                <div className={"questions__header-sort-item"}>Hot</div>
-                <div className={"questions__header-sort-item"}>Week</div>
-                <div className={"questions__header-sort-item"}>Month</div>
+              <div className={"common__sort"}>
+                <div className={"common__sort-item active"}>Interesting</div>
+                <div className={"common__sort-item"}>344 featured</div>
+                <div className={"common__sort-item"}>Hot</div>
+                <div className={"common__sort-item"}>Week</div>
+                <div className={"common__sort-item"}>Month</div>
               </div>
             </div>
           </div>
@@ -122,15 +122,15 @@ class QuestionList extends Component {
             <form>
               <div className={"ask-question__field"}>
                 <div className={"ask-question__field-title"}>Title</div>
-                <input className={"ask-question__field-input"} type={"text"} name={"title"} onChange={this.handleInputChange}/>
+                <input className={"common__input"} type={"text"} name={"title"} onChange={this.handleInputChange}/>
               </div>
 
               <div className={"ask-question__field"}>
                 <div className={"ask-question__field-title"}>Body</div>
-                <textarea className={"ask-question__field-input ask-question__field-textarea"} name={"content"} onChange={this.handleInputChange}/>
+                <textarea className={"common__input common__textarea"} name={"content"} onChange={this.handleInputChange}/>
               </div>
 
-              <div className={"ask-question__submit"} onClick={this.handleSubmitQuestion}>Post Your Question</div>
+              <div className={"common__button"} onClick={this.handleSubmitQuestion}>Post Your Question</div>
             </form>
           </div>
         </Modal>

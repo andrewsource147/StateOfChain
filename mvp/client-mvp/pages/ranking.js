@@ -75,12 +75,12 @@ class Ranking extends Component {
 
             <div className={"questions__header-bot"}>
               <div className={"questions__header-count"}>1,600 questions</div>
-              <div className={"questions__header-sort"}>
-                <div className={"questions__header-sort-item"}>Reputation</div>
-                <div className={"questions__header-sort-item"}>New Users</div>
-                <div className={"questions__header-sort-item"}>Voters</div>
-                <div className={"questions__header-sort-item"}>Editors</div>
-                <div className={"questions__header-sort-item"}>Modarators</div>
+              <div className={"common__sort"}>
+                <div className={"common__sort-item active"}>Reputation</div>
+                <div className={"common__sort-item"}>New Users</div>
+                <div className={"common__sort-item"}>Voters</div>
+                <div className={"common__sort-item"}>Editors</div>
+                <div className={"common__sort-item"}>Modarators</div>
               </div>
             </div>
           </div>

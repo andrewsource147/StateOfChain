@@ -10,8 +10,8 @@ export default class Layout extends Component {
     this.props.dispatch(checkMetamaskInstall())
   }
 
-  isActive = (path) => {
-    return this.props.path == path
+  isActive = (path, subpath) => {
+    return this.props.path === path || this.props.path === subpath
   }
 
   render() {
@@ -21,9 +21,9 @@ export default class Layout extends Component {
         <div className={"content-layout"}>
           <div className={"grid-x"}>
             <div className={"side-bar cell large-3"}>
-              <h2>Stackchain</h2>
-              <div className={`item ${this.isActive("/") ? "active" : ""}`}><Link href="/"><a>Stack Overflow</a></Link></div>
-              <div className={`item ${this.isActive("/ranking") ? "active" : ""}`}><Link href="/ranking"><a>Users</a></Link></div>
+              <Link href="/"><h2>Stackchain</h2></Link>
+              <Link href="/"><div className={`item ${this.isActive("/", '/question') ? "active" : ""}`}>Stack Overflow</div></Link>
+              <Link href="/ranking"><div className={`item ${this.isActive("/ranking") ? "active" : ""}`}>Users</div></Link>
             </div>
             <div className={"cell large-9"}>{this.props.children}</div>
           </div>

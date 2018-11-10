@@ -1,6 +1,7 @@
 .question {
   background-color: #fbfafb;
   padding: 30px;
+  min-height: 100%;
 
   /* ================= Question ================= */
   &__header {
@@ -20,14 +21,19 @@
   }
 
   &__item {
-    padding: 20px 20px 40px;
+    padding: 25px 20px;
     border: solid 1px $grey-lighter;
     background-color: white;
     display: flex;
 
     &--answer {
       border: none;
+      border-bottom: 1px solid $grey-slight-dark;
       background-color: transparent;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 
@@ -39,8 +45,6 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: center no-repeat;
-    background-size: cover;
     box-shadow: 0 0 5px $grey-light;
   }
 
@@ -49,6 +53,28 @@
     font-weight: 600;
     color: $grey-darker;
     text-align: center;
+  }
+
+  &__item-up {
+    margin: 10px auto 15px;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    border-bottom: 15px solid $grey-darker;
+    transition: border-bottom-color .3s;
+
+    &:hover {
+      border-bottom-color: $green-light;
+    }
+  }
+
+  &__item-fav {
+    width: 20px;
+    height: 20px;
+    margin: 0 auto;
+    background-image: url("/static/icon-favorite.svg");
   }
 
   &__item-content {
@@ -64,6 +90,15 @@
 
   &__item-name {
     font-weight: 600;
+
+    a {
+      color: $black-light;
+      transition: color .3s;
+
+      &:hover {
+        color: $green;
+      }
+    }
   }
 
   &__item-reputation {
@@ -93,9 +128,8 @@
   }
 
   &__item-body {
-    font-size: 14px;
-    color: $grey-darker;
-    line-height: 23px;
+    font-size: 15px;
+    line-height: 21px;
   }
 
   /* ================= Question's Answers ================= */
@@ -107,7 +141,37 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 25px 0 20px;
+    margin: 25px 0 0;
     border-bottom: 1px solid $grey-slight-dark;
+
+    &--bot {
+      margin-bottom: 15px;
+      padding-bottom: 5px;
+    }
+  }
+
+  &__answer-submit {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+}
+
+.modal-tx {
+  padding: 50px 30px;
+
+  &__title {
+    font-family: $font-cera;
+    font-weight: 500;
+    font-size: 26px;
+    margin: 0 0 25px;
+  }
+
+  a {
+    color: $green;
+    transition: color .3s;
+
+    &:hover {
+      color: $green-light;
+    }
   }
 }

@@ -2,7 +2,7 @@ import Layout from '../app/components/Layout.js'
 import {Component} from 'react'
 import {connect} from 'react-redux'
 import {updateUserVotes} from "../app/actions/userActions.js"
-import {toSvg} from 'jdenticon'
+import jdenticon from 'jdenticon'
 import { withRouter } from 'next/router'
 
 class Ranking extends Component {
@@ -17,8 +17,9 @@ class Ranking extends Component {
       orderArr: newArray,
     }
   }
-  componentDidMount = ()=>{ 
-    this.props.dispatch(updateUserVotes(this.props.user.users))
+  componentDidMount = ()=>{
+    jdenticon();
+    this.props.dispatch(updateUserVotes(this.props.user.users));
   }
 
   isActive = () => {
@@ -74,7 +75,7 @@ class Ranking extends Component {
             </div>
 
             <div className={"questions__header-bot"}>
-              <div className={"questions__header-count"}>1,600 questions</div>
+              <div className={"questions__header-count"}>{this.props.user.users.length || 0} Users</div>
               <div className={"common__sort"}>
                 <div className={"common__sort-item active"}>Reputation</div>
                 <div className={"common__sort-item"}>New Users</div>

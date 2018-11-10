@@ -10,4 +10,14 @@ export default class answerService {
       return response.data;
     });
   }
+
+  static submitAnswer = (questionId, content, address) => {
+    return axios.post(`http://0.0.0.0:3001/submit/answer`, {
+      question_id: questionId,
+      content,
+      address
+    }).then(response => {
+      return response.data;
+    });
+  }
 }

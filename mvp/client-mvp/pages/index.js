@@ -3,19 +3,15 @@ import Link from 'next/link'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { questionActionTypes } from '../app/actions/questionActions'
-import Modal from '../app/components/Modal'
+import AskQuestion from '../app/components/AskQuestion';
 
 class QuestionList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      form: {
-        title: null,
-        content: null
-      },
       isModalActive: false
-    };
+    }
   }
 
   componentDidMount = () => {
@@ -28,37 +24,6 @@ class QuestionList extends Component {
 
   handleCloseModal = () => {
     this.setState({isModalActive: false});
-  }
-
-  handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-
-    this.setState({
-      form: {
-        ...this.state.form,
-        [name]: value
-      }
-    });
-  }
-
-  handleSubmitQuestion = () => {
-    const title = this.state.form.title;
-    const content = this.state.form.content;
-    const address = this.props.common.user.address;
-
-    if (!title || !content || !address) {
-      return;
-    }
-
-    this.props.dispatch({type: questionActionTypes.SUBMIT_QUESTION, payload: {
-      title,
-      content,
-      address
-    }});
-
-    this.handleCloseModal();
   }
 
   render() {
@@ -106,7 +71,7 @@ class QuestionList extends Component {
                     <a className={"questions__body-item-title"}>{question.title}</a>
                   </Link>
                   <div className={"questions__body-item-info"}>
-                    <span>asked {question.timestamp} by </span>
+                    <span>by </span>
                     <span className={"bold"}>{question.address}</span>
                   </div>
                 </div>
@@ -116,24 +81,7 @@ class QuestionList extends Component {
           </div>
         </div>
 
-        <Modal isActive={this.state.isModalActive} handleClose={this.handleCloseModal}>
-          <div className={"ask-question"}>
-            <h3 className={"ask-question__title"}>Ask a question</h3>
-            <form>
-              <div className={"ask-question__field"}>
-                <div className={"ask-question__field-title"}>Title</div>
-                <input className={"common__input"} type={"text"} name={"title"} onChange={this.handleInputChange}/>
-              </div>
-
-              <div className={"ask-question__field"}>
-                <div className={"ask-question__field-title"}>Body</div>
-                <textarea className={"common__input common__textarea"} name={"content"} onChange={this.handleInputChange}/>
-              </div>
-
-              <div className={"common__button"} onClick={this.handleSubmitQuestion}>Post Your Question</div>
-            </form>
-          </div>
-        </Modal>
+        <AskQuestion isModalActive={this.state.isModalActive} handleCloseModal={this.handleCloseModal}/>
       </Layout>
     )
   }

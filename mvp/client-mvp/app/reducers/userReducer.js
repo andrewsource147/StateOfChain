@@ -16,7 +16,8 @@ export const initialState = {
       address: '0xd1946aeffc2d053b76fab96117b6f2c7bf395e31',
       votes: "-"
     },
-  ]
+  ],
+  isTxModalActive: false
 }
 
 function userReducer(state = initialState, action) {
@@ -38,6 +39,12 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         ...{users: users}
+      }
+    }
+    case "USER.HANDLE_TX_MODAL": {
+      return {
+        ...state,
+        ...{ isTxModalActive: action.payload }
       }
     }
     default:
